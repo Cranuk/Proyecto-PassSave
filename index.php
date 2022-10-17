@@ -2,7 +2,7 @@
     session_start();
     require_once 'autoload.php';
     require_once 'php/configuracion/conexion.php';
-    require_once 'php/configuracion/parametros_online.php';
+    require_once 'php/configuracion/parametros.php';
     require_once 'php/helpers/utilidades.php';
     require_once 'php/plantilla/cabecera.php';
 
