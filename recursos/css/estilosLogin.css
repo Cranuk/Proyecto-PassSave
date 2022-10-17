@@ -1,0 +1,35 @@
+/*Estilo para el login*/
+.seccion-login{
+    margin-top: 5%;
+    text-align: center;
+}
+
+.form-login{
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.letra-chica{
+    font-size: 0.8rem;
+}
+
+.link-registro{
+    font-weight: 600;
+    color: #003049;
+    text-decoration: none;
+}
+
+.ojo-login{
+    position: absolute;
+    top: 78px;
+    right: 2px;
+}
+
+/*Estilos a boxicons*/
+
+.bx-toggle-left, .bx-toggle-right{
+    font-size: 2rem;
+    cursor: pointer;
+}
+

@@ -1,0 +1,161 @@
+/*Estilos globales para la pagina*/
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #888888;
+}
+
+body{
+    background-color: #003049;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1{
+    font-size: 3rem;
+}
+
+h2{
+    font-size: 2rem;
+}
+
+.espacio-5{
+    margin-top: 5px;
+}
+
+.espacio-10{
+    margin-top: 10px;
+}
+
+.relative{
+    position: relative;
+}
+
+.centro{
+    text-align: center;
+}
+
+.icono-grande{
+    font-size: 5rem;
+}
+
+.icono-mediano{
+    font-size: 3rem;
+}
+
+.icono-normal{
+    font-size: 2rem;
+}
+
+.icono-peque{
+    font-size: 1.5rem;
+}
+
+.alerta-error{
+    background: #d62828;
+    border-radius: 15px;
+}
+
+.alerta-advertencia{
+    background:#ffbc0a;
+    border-radius: 15px;
+}
+
+.alerta-aceptado{
+    background:#76c893;
+    border-radius: 15px;
+}
+
+.alerta-info{
+    background:#2a9d8f;
+    border-radius: 15px;
+}
+
+.sin-pagina{
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 15%;
+    color: #ffbc0a;
+}
+
+.mensaje-blanco{
+    color: #fcfaf9;
+}
+
+.resaltar{
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #003049;
+}
+
+.recuadro{
+    background-color: #fcfaf9;
+    padding: 20px;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.recuadro-oscuro{
+    background-color: #003049;
+    padding: 20px;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.recuadro-alertas{
+    padding: 10px;
+    width: 50%;
+    border-radius: 15px;
+    display: inline-block;
+}
+
+.recuadro-botones{
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.recuadro-pie{
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.botones{
+    width: 160px;
+    padding: 5px;
+    color: #fcfaf9;
+    border: none;
+    cursor: pointer;
+}
+
+.pie-pagina{
+    text-align: center;
+    padding: 0.5rem;
+    margin-top: auto;
+    border-top: #fcfaf9 solid 1px;
+}
+
+/*Estilo a boxicons*/
+.color-activo-claro{
+    color: #fcfaf9;
+}
+
+.color-activo{
+    color: #003049;
+}
+
+.color-borrar{
+    color:#c1121f;
+}
+
+.color-editar{
+    color:#f77f00;
+}

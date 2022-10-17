@@ -1,0 +1,41 @@
+/*Estilos para registros*/
+.seccion-registro{
+    margin-top: 5%;
+    text-align: center;
+}
+
+.form-registro{
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.ojo-registro{
+    position: absolute;
+    top: 78px;
+    right: 2px;
+}
+
+.volver-login{
+    padding: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.link-registro{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*Estilos al box-icons*/
+.bx-log-in-circle{
+    color: #fcfaf9
+}
+
+.bx-left-arrow-alt{
+    color: #003049;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
