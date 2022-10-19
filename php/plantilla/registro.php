@@ -8,6 +8,11 @@
                     <br>
                     Usuario registrado
                 </div>
+
+                <?php 
+                    
+                ?>
+
             <?php else:?>
                 <div class="resaltar alerta-error">
                     <i class='bx bxs-error-circle icono-mediano color-activo'></i>
