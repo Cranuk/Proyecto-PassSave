@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="<?=base_url?>recursos/css/estilosLogin.css">
     <link rel="stylesheet" href="<?=base_url?>recursos/css/estilosRegistro.css">
     <link rel="stylesheet" href="<?=base_url?>recursos/css/estilosSesion.css">
+    <link rel="stylesheet" href="<?=base_url?>recursos/css/responsive.css">
     <script src="<?=base_url?>js/login.js"></script>
     <script src="<?=base_url?>js/registro.js"></script>
     <script src="<?=base_url?>js/sesion.js"></script>

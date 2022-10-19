@@ -69,7 +69,11 @@
                         <?php endif;?>
                         <td><?=$sesion['sen_fecha']?></td>
                         <td><?=$sesion['sen_alias']?></td>
-                        <td><?=$sesion['sen_correo']?></td>
+                        <td>
+                            <div class="recuadro-bloques">
+                                <span class="mensaje-blanco"><?=$sesion['sen_correo']?></td></span>
+                                
+                            </div>
                         <td>
                             <div class="relative">
                                 <input type="hidden" value='<?=$sesion['id_sesion']?>' id='idSesion<?=$sesion['id_sesion']?>'> <!--NOTE: este input hidden es para tener el id de la sesion de manera oculta para usarlo en metodos JS-->

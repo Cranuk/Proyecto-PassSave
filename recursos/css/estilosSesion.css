@@ -22,9 +22,10 @@ thead th{
 
 th, td {
     text-align: center;
-    padding: 20px;
+    padding: 10px;
     border-bottom: 2px solid #fcfaf9;
     border-left: 2px solid #fcfaf9;
+    word-break:break-all;
 }
 
 tbody td{

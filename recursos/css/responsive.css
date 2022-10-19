@@ -1,0 +1,37 @@
+@media(max-width: 900px) {
+    /*ANCHOR: estilos a las sesiones*/
+    table thead {
+        position: absolute;
+        visibility: hidden;
+    }
+    table tr {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    table td {
+        position: relative;
+        width: 50%;
+    }
+
+    tbody tr td{
+        white-space: break-word;
+    }
+}
+
+@media (max-width: 500px){
+    /*ANCHOR: estilos al login*/
+    .seccion-login{
+        margin-top: 30%;
+    }
+
+    .recuadro{
+        width: 100%;
+    }
+
+    .form-login, .form-modal{
+        width: 100%;
+    }
+
+    
+}
