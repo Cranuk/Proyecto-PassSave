@@ -10,7 +10,23 @@
                 </div>
 
                 <?php 
-                    
+                    $cabecera = "MIME-Version: 1.0" . "\r\n";
+                    $cabecera .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+                    $para = "crackenfx2@gmail.com";
+                    $asunto = "Registro de nuevo usuario";
+                    $mensaje = 
+                    "<html>
+                        <head>
+                            <title>Aviso de nuevo registro de usuario</title>
+                        </head>
+                        <body>
+                            <h3>ADMIN un nuevo ingreso al sistema PassSave</h3>
+                            <p>Se registro un nuevo usuario para el uso de nuestro sistema</p>
+                        </body>
+                    </html>";
+
+                    mail($para, $asunto, $mensaje, $cabecera);
                 ?>
 
             <?php else:?>
