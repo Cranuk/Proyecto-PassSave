@@ -56,7 +56,9 @@
                     <th>Correo</th>
                     <th>Clave</th>
                     <th>Pagina</th>
-                    <th>Herramientas</th>
+                    <?php if (!$esAdmin):?> <!--NOTE: este fragmento de codigo es visible para admin para temas de control-->
+                        <th>Herramientas</th>
+                    <?php endif;?>
                 </tr>
             </thead>
             <tbody>
@@ -89,20 +91,20 @@
                                 <span class="mensaje-blanco"><?=$sesion['sen_pagina']?></span>
                             </div>
                         </td>
+                        <?php if (!$esAdmin):?>
                         <td>
-                            <?php if (!$esAdmin):?>
-                                <a href="<?=base_url?>sesion/editarSesion&sesion=<?=$sesion['id_sesion']?>" title="editar" class="link-herramientas">
-                                    <div class="recuadro-bloques">
-                                        <i class='bx bxs-edit-alt color-editar icono-normal' ></i>
-                                    </div>
-                                </a>
-                                <a href="#" onclick=abrirModal() title="borrar" class="link-herramientas">
-                                    <div class="recuadro-bloques">
-                                        <i class='bx bxs-eraser color-borrar icono-normal'></i>
-                                    </div>
-                                </a>
-                            <?php endif;?>
+                            <a href="<?=base_url?>sesion/editarSesion&sesion=<?=$sesion['id_sesion']?>" title="editar" class="link-herramientas">
+                                <div class="recuadro-bloques">
+                                    <i class='bx bxs-edit-alt color-editar icono-normal' ></i>
+                                </div>
+                            </a>
+                            <a href="#" onclick=abrirModal() title="borrar" class="link-herramientas">
+                                <div class="recuadro-bloques">
+                                    <i class='bx bxs-eraser color-borrar icono-normal'></i>
+                                </div>
+                            </a>
                         </td>
+                        <?php endif;?>
                     </tr>
                 <?php endforeach;?>
             </tbody>
