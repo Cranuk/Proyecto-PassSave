@@ -85,10 +85,10 @@
                         </td>
                         <td>
                             <div class="recuadro-bloques">
-                                <a href="<?=$sesion['sen_enlace']?>" target="_blank" title="ir a la pagina">
+                                <a href="http://<?=$sesion['sen_enlace']?>" target="_blank" title="ir a la pagina">
                                     <i class='bx bx-link icono-normal color-editar'></i>
                                 </a>
-                                <span class="mensaje-blanco"><?=$sesion['sen_pagina']?></span>
+                                <span class="mensaje-blanco"><?=$sesion['sen_pagina'];?></span>
                             </div>
                         </td>
                         <?php if (!$esAdmin):?>
