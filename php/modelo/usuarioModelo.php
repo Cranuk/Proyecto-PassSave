@@ -2,10 +2,10 @@
 require_once 'php/configuracion/conexion.php';
 
 class usuarioModelo{
-    public $id;
-    public $alias;
-    public $clave;
-    public $nivel;
+    private $id;
+    private $alias;
+    private $clave;
+    private $nivel;
 
     // ANCHOR: getters
     public function getId(){

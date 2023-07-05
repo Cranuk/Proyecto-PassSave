@@ -2,13 +2,13 @@
 require_once 'php/configuracion/conexion.php';
 
 class sesionModelo{
-    public $idSesion;
-    public $idUsuario;
-    public $alias;
-    public $correo;
-    public $clave;
-    public $pagina;
-    public $enlace;
+    private $idSesion;
+    private $idUsuario;
+    private $alias;
+    private $correo;
+    private $clave;
+    private $pagina;
+    private $enlace;
 
     // ANCHOR: getters
     public function getIdSesion(){
