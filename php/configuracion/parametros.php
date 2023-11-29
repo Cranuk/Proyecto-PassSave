@@ -6,7 +6,7 @@ define('usuario','root');
 define('clave','');
 
 //ANCHOR: aqui vamos a declarar variables constantes para uso interno del programa
-define('base_url', 'http://mis-proyectos/MisProgramas/PassSave/');
+define('base_url', 'http://misproyectos/MisProgramas/PassSave/');
 define('controlador_default', 'usuario');
 define('accion_default','login');
 
