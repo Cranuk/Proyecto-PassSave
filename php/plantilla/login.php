@@ -26,7 +26,7 @@
 
                 <label for="">Clave</label>
                 <input type="password" name="clave" id="clave">
-                <i class="bx bx-toggle-left ojo-login" id="ojo-login" onclick="mostrarClave()"></i>
+                <i class="bx bx-toggle-left ojo-login" id="ojo-login" onclick="mostrarClaveLogin()"></i>
 
                 <div class="espacio-10"></div>
                 <div class="recuadro-botones">

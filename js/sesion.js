@@ -12,7 +12,7 @@ function cerrarModal(){
     cerrar.classList.add('ocultar-modal');
 }
 
-function mostrarClave(valor){ // NOTE: ese parametro hace referencia al id de la sesion seleccionada por el usuario
+function mostrarClaveSesion(valor){ // NOTE: ese parametro hace referencia al id de la sesion seleccionada por el usuario
     var idSesion = document.querySelector('#idSesion'+valor).value; // NOTE: obtenemos el valor del input con el id de la sesion
     var clave = document.querySelector('#clave'+valor);
     

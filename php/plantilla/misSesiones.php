@@ -80,7 +80,7 @@
                             <div class="relative">
                                 <input type="hidden" value='<?=$sesion['id_sesion']?>' id='idSesion<?=$sesion['id_sesion']?>'> <!--NOTE: este input hidden es para tener el id de la sesion de manera oculta para usarlo en metodos JS-->
                                 <input type="password" value='<?=$sesion['sen_clave']?>' id='clave<?=$sesion['id_sesion']?>' readonly="readonly" class="seccion-clave">
-                                <i class='bx bx-toggle-left ojo-sesion' id='ojo-sesion<?=$sesion['id_sesion']?>' onclick="mostrarClave(<?=$sesion['id_sesion']?>)"></i>
+                                <i class='bx bx-toggle-left ojo-sesion' id='ojo-sesion<?=$sesion['id_sesion']?>' onclick="mostrarClaveSesion(<?=$sesion['id_sesion']?>)"></i>
                             </div>
                         </td>
                         <td>
