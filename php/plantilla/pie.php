@@ -7,8 +7,6 @@
         <div class="espacio-5"></div>
         Cranuk System &copy; All rights reserved 2020-<?php echo date("Y"); ?>
     </div>
-    
-
 </div>
 </body>
 </html>
