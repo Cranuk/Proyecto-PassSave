@@ -10,57 +10,50 @@ class usuarioControlador{
         require_once 'php/plantilla/registro.php';
     }
 
-    public function registrarUsuario(){
+    public function registrarUsuario() {
         $valorRandom = rand(1,999);
-        $datoAlias = isset($_POST['alias']) ? $_POST['alias'] : '';
-        $datosClave = isset($_POST['clave']) ? $_POST['clave'] : '';
-        $datosClaveRep = isset($_POST['claveRep']) ? $_POST['claveRep'] : '';
-        $registro = false; // NOTE: bandera para el registro de usuario
-
-        // NOTE: verificamos que el alias no este vacio
-        $alias = empty($datoAlias) ? 'anonimo'.$valorRandom : $datoAlias; // NOTE: en el caso de que no tenga nombre de usuario se lo creamos de manera aleatoria
-
-        // NOTE: verificamos que ambas claves sean iguales y no esten vacias
+        $datoAlias = $_POST['alias'];
+        $datosClave = $_POST['clave'];
+        $datosClaveRep = $_POST['claveRep'];
+    
+        $alias = empty($datoAlias) ? 'anonimo'.$valorRandom : $datoAlias;
         $estanVacias = !empty($datosClave) && !empty($datosClaveRep);
-        $sonIgual = $datosClave == $datosClaveRep;
-        if ($estanVacias && $sonIgual) {
-            // NOTE: encriptamos la clave para su seguridad
+        $sonIguales = $datosClave === $datosClaveRep;
+    
+        if ($estanVacias && $sonIguales) {
             $clave = md5($datosClave);
-
-            // NOTE: enviamos los datos para ser guardados a la base de datos
+    
             $dato = new usuarioModelo();
             $dato -> setAlias($alias);
             $dato -> setClave($clave);
-            $registro = $dato -> registrarUsuario();
-            require_once 'php/plantilla/registro.php';
+            $resultado = $dato -> registro() ? true : false;
+            echo $resultado;
         }else{
-            $registro = false;
-            require_once 'php/plantilla/registro.php';
+            $resultado = false;
+            echo $resultado;
         }
     }
 
-    public function logearUsuario(){
-        $datoAlias = isset($_POST['alias']) ? $_POST['alias'] : '';
-        $datoClave = isset($_POST['clave']) ? $_POST['clave'] : '';
+    public function ingresarUsuario(){
+        $datoAlias = $_POST['alias'];
+        $datoClave = $_POST['clave'];
 
         if (!empty($datoAlias) && !empty($datoClave)) {
             // NOTE: verificamos que el usuario y la clave esten en la base de datos
             $dato = new usuarioModelo();
             $dato -> setAlias($datoAlias);
             $dato -> setClave(md5($datoClave));
-            $logeo = $dato -> verificarLogin();
-            if ($logeo) {
-                $_SESSION['usuario'] = $logeo; // NOTE: guardamos en la variable sesion los datos de login
+            $ingreso = $dato -> login();
+            if ($ingreso) {
+                $_SESSION['usuario'] = $ingreso; // NOTE: guardamos en la variable sesion los datos de login
                 header('Location:'.base_url.'sesion/misSesiones');
             }else{
-                $logeo = false;
-                require_once 'php/plantilla/login.php';
+                $_SESSION['usuario'] = 'error'; 
             }
-            
         }else{
-            $logeo = false;
-            require_once 'php/plantilla/login.php';
+            $_SESSION['usuario'] = 'error';
         }
+        require_once 'php/plantilla/login.php';
     }
 
     public function deslogearUsuario(){

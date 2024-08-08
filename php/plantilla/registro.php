@@ -1,10 +1,3 @@
-<!-- MENSAJE DE REGISTRO -->
-<?php 
-    require 'php/plantilla/mensajeRegistro.php';
-?>
-<!-- FIN DE MENSAJE DE REGISTRO -->
-
-<!-- INICIO DE REGISTRO -->
 <section class="seccion-registro">
     <div class="recuadro">
         <div class="relative">
@@ -15,7 +8,7 @@
         <div class="centro">
             <i class='bx bx-user-plus icono-mediano color-activo'></i>
         </div>
-        <form action="<?=base_url?>usuario/registrarUsuario" class="form-registro" method="POST">
+        <form id="form-registro" class="form-registro">
             <label for="alias">Alias</label>
             <input type="text" name="alias" id="alias" required>
 
@@ -33,4 +26,3 @@
         </form>
     </div>
 </section>
-<!-- FIN DE REGISTRO -->

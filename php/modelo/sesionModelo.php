@@ -5,10 +5,10 @@ class sesionModelo{
     private $idSesion;
     private $idUsuario;
     private $alias;
-    private $correo;
+    private $email;
     private $clave;
     private $pagina;
-    private $enlace;
+    private $link;
 
     // ANCHOR: getters
     public function getIdSesion(){
@@ -23,8 +23,8 @@ class sesionModelo{
         return $this->alias;
     }
 
-    public function getCorreo(){
-        return $this->correo;
+    public function getEmail(){
+        return $this->email;
     }
 
     public function getClave(){
@@ -35,8 +35,8 @@ class sesionModelo{
         return $this->pagina;
     }
 
-    public function getEnlace(){
-        return $this->enlace;
+    public function getlink(){
+        return $this->link;
     }
 
     // ANCHOR: setters
@@ -56,8 +56,8 @@ class sesionModelo{
         return $this;
     }
 
-    public function setCorreo($correo){
-        $this->correo = $correo;
+    public function setEmail($email){
+        $this->email = $email;
         return $this;
     }
 
@@ -71,8 +71,8 @@ class sesionModelo{
         return $this;
     }
 
-    public function setEnlace($enlace){
-        $this->enlace = $enlace;
+    public function setlink($link){
+        $this->link = $link;
         return $this;
     }
 
@@ -81,53 +81,41 @@ class sesionModelo{
         $base = Conexion::conectar();
         $idSesion = $this -> getIdSesion();
         $idUsuario = $this -> getIdUsuario();
-        $sql = "SELECT * FROM sesiones WHERE id_sesion = :idSesion AND sen_idUsuario = :idUsuario";
+        $sql = "SELECT * FROM sesiones WHERE id = :idSesion AND usuario_id = :idUsuario";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':idSesion', $idSesion);
         $consulta -> bindparam(':idUsuario', $idUsuario);
         $consulta -> execute();
         $resultado = $consulta ->fetch(PDO::FETCH_ASSOC);
-        if ($resultado) {
-            return $resultado;
-        }else{
-            return false;
-        }
+        return $resultado;
     }
 
-    public function obtenerSesionesUsuario(){ // NOTE: nos trae los datos de todas las sesiones que tenga el usuario
+    public function obtenerSesionesUsuario(){ // NOTE: nos trae los datos de todas las sesiones guardadas que tenga el usuario
         $base = Conexion::conectar();
         $idUsuario = $this -> getIdUsuario();
-        $sql = "SELECT * FROM sesiones WHERE sen_idUsuario = :idUsuario";
+        $sql = "SELECT * FROM sesiones WHERE usuario_id = :idUsuario";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':idUsuario', $idUsuario);
         $consulta -> execute();
         $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
-        if ($resultado) {
-            return $resultado;
-        }else{
-            return false;
-        }
+        return $resultado;
     }
 
     public function obtenerSesionesAdmin(){ //NOTE: si es nivel admin se mostrara las sesiones guardadas de todos los usuarios para el mantenimiento de la pagina
         $base = Conexion::conectar();
         $idUsuario = $this -> getIdUsuario();
-        $sql = "SELECT sesiones.* FROM sesiones INNER JOIN usuarios ON usuarios.usos_nivel = 'admin' AND usuarios.id_usuario = :idUsuario"; 
+        $sql = "SELECT sesiones.* FROM sesiones INNER JOIN usuarios ON usuarios.rol = 'admin' AND usuarios.usuario_id = :idUsuario"; 
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':idUsuario', $idUsuario);
         $consulta -> execute();
         $resultado = $consulta -> fetchAll(PDO::FETCH_ASSOC);
-        if ($resultado) {
-            return $resultado;
-        }else{
-            return false;
-        }
+        return $resultado;
     }
 
     public function cantidadSesionesAdmin(){ //NOTE: si es nivel admin se mostrara la cantidad de sesiones guardadas de todos los usuarios para el mantenimiento de la pagina
         $base = Conexion::conectar();
         $idUsuario = $this -> getIdUsuario();
-        $sql = "SELECT COUNT(id_sesion) AS cantidad FROM sesiones INNER JOIN usuarios ON usuarios.usos_nivel = 'admin' AND usuarios.id_usuario = :idUsuario";
+        $sql = "SELECT COUNT(*) AS cantidad FROM sesiones";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':idUsuario', $idUsuario);
         $consulta -> execute();
@@ -143,7 +131,7 @@ class sesionModelo{
     public function cantidadSesiones(){ //NOTE: cantidad de sesiones de cada usuario de manera individual
         $base = Conexion::conectar();
         $idUsuario = $this -> getIdUsuario();
-        $sql = "SELECT COUNT(id_sesion) AS cantidad FROM sesiones WHERE sen_idUsuario = :idUsuario";
+        $sql = "SELECT COUNT(*) AS cantidad FROM sesiones WHERE usuario_id = :idUsuario";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':idUsuario', $idUsuario);
         $consulta -> execute();
@@ -161,20 +149,20 @@ class sesionModelo{
         $idUsuario = $this -> getIdUsuario();
         $idSesion = $this -> getIdSesion();
         $alias = $this -> getAlias();
-        $correo = $this -> getCorreo();
+        $email = $this -> getEmail();
         $clave = $this -> getClave();
         $pagina = $this -> getPagina();
-        $enlace = $this -> getEnlace();
-        $sql = "UPDATE sesiones SET sen_alias = :alias, sen_correo = :correo, sen_clave = :clave, sen_pagina = :pagina, sen_enlace = :enlace, sen_fecha = CURDATE() 
-                WHERE id_sesion = :idSesion AND sen_idUsuario = :idUsuario";
+        $link = $this -> getlink();
+        $sql = "UPDATE sesiones SET alias = :alias, email = :email, clave = :clave, pagina = :pagina, link = :link
+                WHERE id = :idSesion AND usuario_id = :idUsuario";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':idUsuario', $idUsuario);
         $consulta -> bindparam(':idSesion', $idSesion);
         $consulta -> bindparam(':alias', $alias);
-        $consulta -> bindparam(':correo', $correo);
+        $consulta -> bindparam(':email', $email);
         $consulta -> bindparam(':clave', $clave);
         $consulta -> bindparam(':pagina', $pagina);
-        $consulta -> bindparam(':enlace', $enlace);
+        $consulta -> bindparam(':link', $link);
         $resultado = $consulta -> execute();
         return $resultado;
     }
@@ -183,18 +171,18 @@ class sesionModelo{
         $base = Conexion::conectar();
         $idUsuario = $this -> getIdUsuario();
         $alias = $this -> getAlias();
-        $correo = $this -> getCorreo();
+        $email = $this -> getEmail();
         $clave = $this -> getClave();
         $pagina = $this -> getPagina();
-        $enlace = $this -> getEnlace();
-        $sql = "INSERT INTO sesiones(sen_idUsuario, sen_alias, sen_correo, sen_clave, sen_pagina, sen_enlace, sen_fecha) VALUES (:idUsuario, :alias, :correo, :clave, :pagina, :enlace, CURDATE())";
+        $link = $this -> getlink();
+        $sql = "INSERT INTO sesiones(usuario_id, alias, email, clave, pagina, link) VALUES (:idUsuario, :alias, :email, :clave, :pagina, :link)";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':idUsuario', $idUsuario);
         $consulta -> bindparam(':alias', $alias);
-        $consulta -> bindparam(':correo', $correo);
+        $consulta -> bindparam(':email', $email);
         $consulta -> bindparam(':clave', $clave);
         $consulta -> bindparam(':pagina', $pagina);
-        $consulta -> bindparam(':enlace', $enlace);
+        $consulta -> bindparam(':link', $link);
         $resultado = $consulta -> execute();
         return $resultado;
     }
@@ -203,7 +191,7 @@ class sesionModelo{
         $base = Conexion::conectar();
         $idUsuario = $this -> getIdUsuario();
         $idSesion = $this -> getIdSesion();
-        $sql = "DELETE FROM sesiones WHERE id_sesion = :idSesion AND sen_idUsuario = :idUsuario";
+        $sql = "DELETE FROM sesiones WHERE id = :idSesion AND usuario_id = :idUsuario";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':idUsuario', $idUsuario);
         $consulta -> bindparam(':idSesion', $idSesion);

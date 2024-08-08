@@ -12,7 +12,7 @@
     <div class="recuadro recuadro-espaciado">
         <div class="recuadro-bloques">
             <i class='bx bxs-user-circle icono-normal color-activo'></i>
-            <span class="resaltar"><?=$usuario['usos_alias']?></span>
+            <span class="resaltar"><?=$usuario['alias']?></span>
         </div>
         <?php if($esAdmin):?>
             <div class="recuadro-bloques"><!--NOTE: usar un helpers para saber la cantidad de sesiones de usuario especifico-->
@@ -24,7 +24,7 @@
                 <i class='bx bx-stats icono-normal color-activo'></i>
                 <span class="resaltar">sesiones:<?=$cantidadSesiones['cantidad']?></span>
             </div>
-            <a href="<?=base_url?>sesion/agregarSesion">
+            <a class="link-agregarSesion">
                 <div class="recuadro-bloques">
                     <i class='bx bxs-add-to-queue icono-normal color-activo'></i>
                     <span class="resaltar">Agregar sesion</span>
@@ -65,45 +65,47 @@
                 <?php foreach ($misSesiones as $sesion):?>
                     <tr>
                         <?php if ($esAdmin):?> <!--NOTE: este fragmento de codigo es visible para admin para temas de control-->
-                            <?php $aliasUsuario =  Utilidades::aliasUsuario($sesion['sen_idUsuario'])?>
-                            <td><?=$sesion['sen_idUsuario']?> / <?=$aliasUsuario['alias']?></td>
-                            <td><?=$sesion['id_sesion'];?></td>
+                            <?php $aliasUsuario =  Utilidades::aliasUsuario($sesion['usuario_id'])?>
+                            <td><?=$sesion['usuario_id']?> / <?=$aliasUsuario['alias']?></td>
+                            <td><?=$sesion['id'];?></td>
                         <?php endif;?>
-                        <td><?=$sesion['sen_fecha']?></td>
-                        <td><?=$sesion['sen_alias']?></td>
+                        <td><?=$sesion['fecha']?></td>
+                        <td><?=$sesion['alias']?></td>
                         <td>
                             <div class="recuadro-bloques">
-                                <span class="mensaje-blanco"><?=$sesion['sen_correo']?></td></span>
+                                <span class="mensaje-blanco"><?=$sesion['email']?></td></span>
                                 
                             </div>
                         <td>
                             <div class="relative">
-                                <input type="hidden" value='<?=$sesion['id_sesion']?>' id='idSesion<?=$sesion['id_sesion']?>'> <!--NOTE: este input hidden es para tener el id de la sesion de manera oculta para usarlo en metodos JS-->
-                                <input type="password" value='<?=$sesion['sen_clave']?>' id='clave<?=$sesion['id_sesion']?>' readonly="readonly" class="seccion-clave">
-                                <i class='bx bx-toggle-left ojo-sesion' id='ojo-sesion<?=$sesion['id_sesion']?>' onclick="mostrarClaveSesion(<?=$sesion['id_sesion']?>)"></i>
+                                <input type="hidden" value='<?=$sesion['id']?>' id='idSesion<?=$sesion['id']?>'> <!--NOTE: este input hidden es para tener el id de la sesion de manera oculta para usarlo en metodos JS-->
+                                <input type="password" value='<?=$sesion['clave']?>' id='clave<?=$sesion['id']?>' readonly="readonly" class="seccion-clave">
+                                <i class='bx bx-toggle-left ojo-sesion' id='ojo-sesion<?=$sesion['id']?>'></i>
                             </div>
                         </td>
                         <td>
                             <div class="recuadro-bloques">
-                                <a href=" http://<?=$sesion['sen_enlace']?>" target="_blank" title="ir a la pagina">
-                                    <i class='bx bx-link icono-normal color-editar'></i>
-                                </a>
-                                <span class="mensaje-blanco"><?=$sesion['sen_pagina'];?></span>
+                                <?php if($sesion['link'] != 'SC'):?>
+                                    <a href=" http://<?=$sesion['link']?>" target="_blank" title="ir a la pagina">
+                                        <i class='bx bx-link icono-normal color-editar'></i>
+                                    </a>
+                                <?php endif;?>
+                                    <span class="mensaje-blanco"><?=$sesion['pagina'];?></span>
                             </div>
                         </td>
                         <?php if (!$esAdmin):?>
-                        <td>
-                            <a href="<?=base_url?>sesion/editarSesion&sesion=<?=$sesion['id_sesion']?>" title="editar" class="link-herramientas">
-                                <div class="recuadro-bloques">
-                                    <i class='bx bxs-edit-alt color-editar icono-normal' ></i>
-                                </div>
-                            </a>
-                            <a href="#" onclick=abrirModal() title="borrar" class="link-herramientas">
-                                <div class="recuadro-bloques">
-                                    <i class='bx bxs-eraser color-borrar icono-normal'></i>
-                                </div>
-                            </a>
-                        </td>
+                            <td>
+                                <a title="editar" class="link-herramientas link-editarSesion" data-id='<?=$sesion['id']?>'>
+                                    <div class="recuadro-bloques">
+                                        <i class='bx bxs-edit-alt color-editar icono-normal'></i>
+                                    </div>
+                                </a>
+                                <a title="borrar" class="link-herramientas link-borrarSesion" data-id='<?=$sesion['id']?>'>
+                                    <div class="recuadro-bloques">
+                                        <i class='bx bxs-eraser color-borrar icono-normal'></i>
+                                    </div>
+                                </a>
+                            </td>
                         <?php endif;?>
                     </tr>
                 <?php endforeach;?>
@@ -121,21 +123,4 @@
 </section>
 <!-- FIN DE LA TABLA -->
 
-<!-- INICIO DE MODAL-->
-<section class="seccion-modal" id="modal-borrarSesion">
-    <div class="recuadro-modal">
-        <div class="centro">
-            <i class='bx bx-message-alt-x icono-mediano color-activo'></i>
-        </div>
-        <form action="<?=base_url?>sesion/borrarSesion&sesion=<?=$sesion['id_sesion']?>" method="post" class="form-modal">
-            <div class="resaltar">Desea eliminar esta sesion de manera permanente???</div>
-            <div class="espacio-10"></div>
-            <div class="recuadro-botones">
-                <input type="submit" value="Eliminar" class="botones alerta-info">
-                <input type="button" value="Cancelar" onclick=cerrarModal() class="botones alerta-error">
-            </div>
-            
-        </form>
-    </div>
-</section>
-<!-- FIN DE MODAL -->
+<?php include 'php/plantilla/modales.php'; ?>

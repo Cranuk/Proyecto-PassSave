@@ -25,6 +25,10 @@ h2{
     font-size: 2rem;
 }
 
+a{
+    cursor: pointer;
+}
+
 .espacio-5{
     margin-top: 5px;
 }

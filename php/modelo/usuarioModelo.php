@@ -46,25 +46,29 @@ class usuarioModelo{
     }
 
     // ANCHOR: funciones
-    public function registrarUsuario(){
-        $base = Conexion::conectar();
-        $alias = $this -> getAlias();
-        $clave = $this -> getClave();
-        $nivel = 'usuario';
-        $sql = "INSERT INTO usuarios(usos_alias, usos_clave, usos_nivel) VALUES (:alias, :clave, :nivel)";
-        $consulta = $base->prepare($sql);
-        $consulta -> bindparam(':alias', $alias);
-        $consulta -> bindparam(':clave', $clave);
-        $consulta -> bindparam(':nivel', $nivel);
-        $resultado = $consulta->execute();
-        return $resultado;
+    public function registro() {
+        try {
+            $base = Conexion::conectar();
+            $alias = $this->getAlias();
+            $clave = $this->getClave();
+            $sql = "INSERT INTO usuarios (alias, clave) VALUES (:alias, :clave)";
+            $consulta = $base->prepare($sql);
+            $consulta->bindparam(':alias', $alias);
+            $consulta->bindparam(':clave', $clave);
+            $resultado = $consulta->execute();
+            return $resultado;
+        } catch (Exception $e) {
+            // Manejo de errores
+            error_log("Error en registro: " . $e->getMessage());
+            return false;
+        }
     }
 
-    public function verificarLogin(){
+    public function login(){
         $base = Conexion::conectar();
         $alias = $this -> getAlias();
         $clave = $this -> getClave();
-        $sql = "SELECT * FROM usuarios WHERE usos_alias = :alias AND usos_clave = :clave";
+        $sql = "SELECT * FROM usuarios WHERE alias = :alias AND clave = :clave";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':alias', $alias);
         $consulta -> bindparam(':clave', $clave);
@@ -81,7 +85,7 @@ class usuarioModelo{
     public function aliasUsuario(){
         $base = Conexion::conectar();
         $id = $this -> getId();
-        $sql = "SELECT usos_alias AS alias FROM usuarios WHERE id_usuario = :id";
+        $sql = "SELECT alias FROM usuarios WHERE id = :id";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':id', $id);
         $consulta -> execute();
@@ -92,15 +96,11 @@ class usuarioModelo{
     public function esAdmin(){
         $base = Conexion::conectar();
         $id = $this -> getId();
-        $sql = "SELECT usos_nivel FROM usuarios WHERE id_usuario = :id";
+        $sql = "SELECT rol FROM usuarios WHERE id = :id";
         $consulta = $base -> prepare($sql);
         $consulta -> bindparam(':id', $id);
         $consulta -> execute();
-        $dato = $consulta ->fetch(PDO::FETCH_ASSOC);
-        if ($dato['usos_nivel'] == 'admin'){
-            return true;
-        }else{
-            return false;
-        }
+        $dato = $consulta -> fetch(PDO::FETCH_ASSOC);
+        return $dato;
     }
 }

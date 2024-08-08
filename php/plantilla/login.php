@@ -1,26 +1,10 @@
-<!-- INICIO MENSAJES DE REGISTRO -->
-<?php if(isset($logeo)):?>
-    <section class="seccion-login">
-        <div class="recuadro-alertas">
-            <?php if($logeo == false):?>
-                <div class="alerta-error resaltar">
-                    <i class='bx bxs-error-circle icono-mediano color-activo'></i>
-                    <br>
-                    Usuario y/o clave incorrectos
-                </div>
-            <?php endif;?>
-        </div>
-    </section>
-<?php endif;?>
-<!-- FIN DE MENSAJES DE REGISTRO -->
-
 <!--LOGIN-->
     <section class="seccion-login">
         <div class="recuadro">
             <div class="centro">
                 <i class='bx bxs-user-pin icono-mediano color-activo'></i>
             </div>
-            <form action="<?=base_url?>usuario/logearUsuario" class="form-login" method="POST">
+            <form action="<?=base_url?>usuario/ingresarUsuario" class="form-login" id="form-login" method="POST">
                 <label for="">Alias</label>
                 <input type="text" name="alias" id="alias">
 

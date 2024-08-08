@@ -1,19 +1,38 @@
-'use strict'
-
-function mostrarClaveRegistro(){
-    var clave = document.querySelector('#clave');
-    var claveRep = document.querySelector('#claveRep');
-    var ojoClave = document.querySelector('#ojo-registro');
+$(document).ready(function() {
+    var url = 'http://passsave/';
     
-    ojoClave.classList.toggle('bx-toggle-right'); // NOTE: imagen de ocultar y mostrar clave
-    ojoClave.classList.toggle('color-activo');
-    let clave_campo = document.querySelector('#clave'); // NOTE: variable donde tiene el elemento
-    let clave_rep_campo = document.querySelector('#claveRep');
-    if(clave_campo.type == "password"){
-        clave_campo.type = "text";
-        clave_rep_campo.type = "text";
-    }else{
-        clave_campo.type = "password";
-        clave_rep_campo.type = "password";
-    }
-}
+    $('#ojo-registro').on('click', function() {
+        var clave = $('#clave');
+        var claveRep = $('#claveRep');
+        
+        $(this).toggleClass('bx-toggle-right color-activo');
+        
+        if (clave.attr('type') === 'password') {
+            clave.attr('type', 'text');
+            claveRep.attr('type', 'text');
+        } else {
+            clave.attr('type', 'password');
+            claveRep.attr('type', 'password');
+        }
+    });
+
+    $('#form-registro').on('submit', function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: url + 'usuario/registrarUsuario',
+            type: 'POST',
+            data: $(this).serialize(),
+            success: function(response) {
+                if (response) {
+                    alert('¡Registro exitoso!');
+                    $('#form-registro')[0].reset();
+                } else {
+                    alert('Error al registrar el usuario. Inténtalo de nuevo.');
+                }
+            },
+            error: function(response) {
+                console.log('Error:', response.message);
+            }
+        });        
+    });
+});
