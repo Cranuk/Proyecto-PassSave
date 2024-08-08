@@ -198,5 +198,17 @@ class sesionModelo{
         $resultado = $consulta -> execute();
         return $resultado;
     }
+
+    public function claveVerificada(){ // NOTE: funcion que verifica que tu clave es la correcta
+        $base = Conexion::conectar();
+        $idUsuario = $this -> getIdUsuario();
+        $clave = $this -> getClave();
+        $sql = "SELECT * FROM usuario WHERE id = :idUsuario AND clave = :clave";
+        $consulta = $base -> prepare($sql);
+        $consulta -> bindparam(':idUsuario', $idUsuario);
+        $consulta -> bindparam(':clave', $idSesion);
+        $resultado = $consulta -> execute();
+        return $resultado;
+    }
 }
 ?>

@@ -1,3 +1,23 @@
+<!-- MODAL CONFIRMAR CLAVE-->
+<section class="seccion-modal" id="modal-verClave">
+    <div class="recuadro-modal">
+        <div class="centro">
+            <i class='bx bx-message-alt-x icono-mediano color-activo'></i>
+        </div>
+        <form id="form-verClave" class="form-modal">
+            <label for="clave">Ingrese su clave de sesion:</label>
+            <input type="password" name="clave" id="clave" required>
+            <div class="espacio-10"></div>
+            <div class="recuadro-botones">
+                <input type="submit" value="Ver clave" class="botones alerta-info">
+                <input type="button" value="Cancelar" class="botones alerta-error" id="button-verCancelar">
+            </div>
+            
+        </form>
+    </div>
+</section>
+<!-- FIN DE MODAL -->
+
 <!-- MODAL BORRAR SESION-->
 <section class="seccion-modal" id="modal-borrarSesion">
     <div class="recuadro-modal">

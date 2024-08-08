@@ -1,5 +1,6 @@
 $(document).ready(function() {
     var url = 'http://passsave/';
+    var idSeleccionada = "";
 
     $('.link-borrarSesion').on('click', function() {
         let sesionId = $(this).data('id');
@@ -42,22 +43,42 @@ $(document).ready(function() {
     });
 
     $('.ojo-sesion').on('click', function() {
-        var id = $(this).attr('id').replace('ojo-sesion', '');
-        var idSesion = $('#idSesion' + id).val();
-        var clave = $('#clave' + id);
+        $('#modal-verClave').removeClass('ocultar-modal').addClass('abrir-modal');
+        idSeleccionada = $(this).attr('id').replace('ojo-sesion', '');
+    });
+
+    $('#button-verCancelar').on('click', function() {
+        $('#modal-verClave').removeClass('abrir-modal').addClass('ocultar-modal');
+    });
+
+    $('#form-verClave').on('submit', function(event){
+        event.preventDefault();
+        let claveIngresada = $('#clave').val();
         
-        if (id == idSesion) {
-            var ojoClave = $('#ojo-sesion' + id);
-            ojoClave.toggleClass('bx-toggle-right color-activo-claro');
-            
-            if (clave.attr('type') === 'password') {
-                clave.attr('type', 'text');
-            } else {
-                clave.attr('type', 'password');
+        $.ajax({
+            type: "POST",
+            url: url + "sesion/claveVerificada",
+            data: {
+                clave: claveIngresada
+            },
+            success: function (response) {
+                if (response) {
+                    var ojoClave = $('#ojo-sesion' + idSeleccionada);
+                    ojoClave.toggleClass('bx-toggle-right color-activo-claro');
+
+                    var inputClave = $('#clave' + idSeleccionada);
+                    if (inputClave.attr('type') === 'password') {
+                        inputClave.attr('type', 'text');
+                    } else {
+                        inputClave.attr('type', 'password');
+                    }
+                    $('#form-verClave')[0].reset();
+                    $('#modal-verClave').removeClass('abrir-modal').addClass('ocultar-modal');
+                } else {
+                    alert('Clave incorrecta');
+                }
             }
-        } else {
-            console.log('error al mostrar clave');
-        }
+        });
     });
 
     $('#form-agregarSesion').on('submit', function(event){

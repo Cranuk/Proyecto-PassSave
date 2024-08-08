@@ -86,7 +86,7 @@
                         <td>
                             <div class="recuadro-bloques">
                                 <?php if($sesion['link'] != 'SC'):?>
-                                    <a href=" http://<?=$sesion['link']?>" target="_blank" title="ir a la pagina">
+                                    <a href="<?=$sesion['link']?>" target="_blank" title="ir a la pagina">
                                         <i class='bx bx-link icono-normal color-editar'></i>
                                     </a>
                                 <?php endif;?>

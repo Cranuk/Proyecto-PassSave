@@ -30,6 +30,27 @@ class sesionControlador{
         }
     }
 
+    public function verificarClave(){
+        $logeado = Utilidades::logeado();
+        if($logeado){
+            $clave = $_POST['clave'];
+            $datosUsuario = $_SESSION['usuario'];
+
+            if (!is_null($clave)) {
+                $dato = new sesionModelo();
+                $dato -> setIdUsuario($datosUsuario['id']);
+                $dato -> setClave(md5($clave));
+                $resultado = $dato -> claveVerificada();
+                echo $resultado;
+            }else{
+                $resultado = false;
+                echo $resultado;
+            }
+        }else{
+            header('Location:'.base_url);
+        }
+    }
+
     public function borrarSesion(){ //NOTE: llevamos a cabo la eliminacion de la sesion de un usuario
         $logeado = Utilidades::logeado();
         if ($logeado) {
@@ -40,7 +61,8 @@ class sesionControlador{
             $dato -> setIdSesion($id_sesion);
             $dato -> setIdUsuario($datosUsuario['id']);
             $dato -> borrarSesion();
-            require_once 'php/plantilla/misSesiones.php';
+            $misSesiones = $dato -> obtenerSesionesUsuario();
+            header('Location:'.base_url.'sesion/misSesiones');
         }else{
             header('Location:'.base_url);
         }
@@ -71,14 +93,14 @@ class sesionControlador{
             $datosUsuario = $_SESSION['usuario'];
 
             // NOTE: captura los datos enviados por post en variables para un mejor manejo de datos 
-            $id_sesion = !empty($_POST['id_sesion']) ? $_POST['id_sesion'] : null;
+            $id_sesion = !empty($_POST['id']) ? $_POST['id'] : false;
             $email = !empty($_POST['email']) ? $_POST['email'] : null;
             $clave = !empty($_POST['clave']) ? $_POST['clave'] : null;
             $alias = !empty($_POST['alias']) ? $_POST['alias'] : 'SC';
             $pagina = !empty($_POST['pagina']) ? $_POST['pagina'] : null;
             $link = !empty($_POST['link']) ? $_POST['link'] : 'SC';
 
-            if (!is_null($email) && !is_null($clave) && !is_null($pagina) && !is_null($id_sesion)) {
+            if (!is_null($email) && !is_null($clave) && !is_null($pagina) && $id_sesion) {
                 // NOTE: seteamos los datos antes de guardarlos en la base de datos
                 $dato = new sesionModelo();
                 $dato -> setIdUsuario($datosUsuario['id']);
@@ -89,9 +111,6 @@ class sesionControlador{
                 $dato -> setPagina($pagina);
                 $dato -> setLink($link);
                 $resultado = $dato -> actualizarSesion();
-                var_dump($id_sesion);
-                var_dump($resultado);
-                die();
                 echo $resultado;
             }else{
                 $resultado = false;
