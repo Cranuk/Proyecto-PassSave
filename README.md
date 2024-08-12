@@ -1,9 +1,9 @@
 <h1>PassSave</h1>
-Es un software donde te permite guardar los datos de las sesiones web de tus paginas mas visitadas
+Es un SW donde te permite guardar los datos de las sesiones web de tus paginas mas visitadas
 
 Este sistema tiene como lenguaje a PHP en la arquitectura MVC, con esta estructura el software tiene una mejor lectura y facil entendimiento de lo que esta realizado cada archivo y tareas realizara cada uno. Tambien utilizo PDO para las consultas SQL.
 
-<h3>Estructura del software </h3>
+<h3>Estructura del SW </h3>
 <ul>
   <li>
       Login: Diseño simple donde te pide alias y clave.
