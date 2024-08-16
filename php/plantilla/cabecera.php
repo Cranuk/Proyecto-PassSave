@@ -17,6 +17,7 @@
     <script src="<?=base_url?>js/login.js"></script>
     <script src="<?=base_url?>js/registro.js"></script>
     <script src="<?=base_url?>js/sesion.js"></script>
+    <link rel="icon" href="Proyectos.png" type="image/png">
     <title>PassSave</title>
 </head>
 <body>
