@@ -15,7 +15,7 @@
 ## 📸 Capturas de Pantalla
 
 ![Login de usuario](https://github.com/Cranuk/Proyecto-PassSave/blob/master/recursos/img/passSave-image4.png)
-![Registro de usuario]()
+![Registro de usuario](https://github.com/Cranuk/Proyecto-PassSave/blob/master/recursos/img/passSave-image5.png)
 ![Pantalla de inicio](https://github.com/Cranuk/Proyecto-PassSave/blob/master/recursos/img/passSave-image1.png)
 ![Registro de sesiones](https://github.com/Cranuk/Proyecto-PassSave/blob/master/recursos/img/passSave-image2.png)
 ![Sesiones guardadas](https://github.com/Cranuk/Proyecto-PassSave/blob/master/recursos/img/passSave-image3.png)
