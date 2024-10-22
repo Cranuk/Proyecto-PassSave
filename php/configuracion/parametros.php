@@ -6,7 +6,7 @@ define('usuario','root');
 define('clave','');
 
 //ANCHOR: aqui vamos a declarar variables constantes para uso interno del programa
-define('base_url', 'http://passsave/');
+define('base_url', 'http://propasssavephp/');
 define('controlador_default', 'usuario');
 define('accion_default','login');
 
