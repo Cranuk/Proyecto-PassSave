@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var url = 'http://passsave/';
+    var url = 'http://propasssavephp/';
     var idSeleccionada = "";
 
     $('.link-borrarSesion').on('click', function() {

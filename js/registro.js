@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var url = 'http://passsave/';
+    var url = 'http://propasssavephp/';
     
     $('#ojo-registro').on('click', function() {
         var clave = $('#clave');
